@@ -72,9 +72,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="input-wrapper">
 
+      <paper-input id="locationInput"
+                   no-label-float
+                   label="Add a location"
+                   on-keydown="_checkAdd">
+      </paper-input>
       <paper-input id="todoInput"
                    no-label-float
-                   label="Add an item"
+                   label="Add an event"
                    on-keydown="_checkAdd">
       </paper-input>
 
@@ -99,7 +104,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     _add: function() {
       if (this.$.todoInput.value) {
-        this.fire('add-todo', {value: this.$.todoInput.value});
+        this.fire('add-todo', {value: this.$.todoInput.value + this.$.locationInput.value});
         this.$.todoInput.value = null;
       }
     }
