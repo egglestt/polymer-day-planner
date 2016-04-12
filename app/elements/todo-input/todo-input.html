@@ -72,16 +72,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="input-wrapper">
 
-      <paper-input id="locationInput"
-                   no-label-float
-                   label="Add a location"
-                   on-keydown="_checkAdd">
-      </paper-input>
       <paper-input id="todoInput"
                    no-label-float
                    label="Add an event"
                    on-keydown="_checkAdd">
       </paper-input>
+      <paper-input id="dateInput"
+                   no-label-float
+                   label="Add a date (01/01/2016)"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="timeInput"
+                   no-label-float
+                   label="Add a time (00:00am)"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="locationInput"
+                   no-label-float
+                   label="Add a location"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="lengthInput"
+                   no-label-float
+                   label="Add a length (1hr)"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="descriptionInput"
+                   no-label-float
+                   label="Add an description"
+                   on-keydown="_checkAdd">
+      </paper-input>
+
 
       <paper-button on-tap="_add">Add</paper-button>
 
@@ -104,8 +125,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     _add: function() {
       if (this.$.todoInput.value) {
-        this.fire('add-todo', {value: this.$.todoInput.value + this.$.locationInput.value});
+        this.fire('add-todo', {value: this.$.todoInput.value + "|"
+          + this.$.dateInput.value + "|"
+          + this.$.timeInput.value + "|" 
+          + this.$.locationInput.value + "|"
+          + this.$.lengthInput.value + "|"
+          + this.$.descriptionInput.value});
+
         this.$.todoInput.value = null;
+        this.$.dateInput.value = null;
+        this.$.timeInput.value = null;
+        this.$.locationInput.value = null;
+        this.$.lengthInput.value = null;
+        this.$.descriptionInput.value = null;
       }
     }
 

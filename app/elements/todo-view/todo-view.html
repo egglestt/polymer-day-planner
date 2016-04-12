@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../todo-list/todo-list.html">
 <link rel="import" href="../todo-input/todo-input.html">
 <link rel="import" href="../todo-icons/todo-icons.html">
+<link rel="import" href="../todo-item/todo-item.html">
 
 
 <dom-module id="todo-view">
@@ -167,6 +168,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Main Content -->
         <div class="content">
 
+          <h1 id="header"
+              class="flex">
+          event   date   time   location   length   description
+          </hi>
           <todo-list todos="{{todos}}"
                      filter-by="{{route}}"
                      on-delete-todo="deleteTodo">
@@ -193,6 +198,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       addTodo: function(e) {
+        //var ntodo = new todo-item;
+          //ntodo.label = (e.detail.value);
+          //ntodo.locationLabel = (e.detail.locationValue);
         this.push('todos', {
           label: (e.detail.value),
           isComplete: false
