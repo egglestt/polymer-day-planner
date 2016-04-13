@@ -1,0 +1,148 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="todo-input">
+
+  <template>
+
+    <style>
+      :host {
+        display: block;
+      }
+
+      .input-wrapper {
+        padding-left: 70px;
+      }
+
+      paper-input {
+        display: inline-block;
+        width: 65%;
+        --paper-input-container: {
+          padding-bottom: 0;
+          margin-bottom: 20px;
+        };
+
+        /* These styles are not DRY :( */
+        --paper-input-container-label: {
+          font-size: 20px;
+          font-family: 'Roboto Slab', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+          font-weight: normal;
+          color: #9E9E9E;
+        };
+        --paper-input-container-input: {
+          font-size: 20px;
+          font-family: 'Roboto Slab', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        };
+        --paper-input-container-underline: {
+          top: 7px;
+          background: #9E9E9E;
+        };
+        --paper-input-container-underline-focus: {
+          top: 7px;
+        };
+      }
+
+      paper-input[focused] + paper-button,
+      paper-button[focused] {
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      paper-button {
+        background: #E0E0E0;
+        color: #9E9E9E;
+        font-size: 14px;
+        padding-left: 0px;
+        margin-left: 0px;
+      }
+
+      paper-button[focused] {
+        /* https://github.com/PolymerElements/paper-button/pull/43 */
+        outline-width: 3px;
+      }
+    </style>
+
+    <div class="input-wrapper">
+
+      <paper-input id="todoInput"
+                   no-label-float
+                   label="Add an event"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="dateInput"
+                   no-label-float
+                   label="Add a date (mm/dd/yyyy)"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="timeInput"
+                   no-label-float
+                   label="Add a time (00:00am/pm)"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="locationInput"
+                   no-label-float
+                   label="Add a location"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="lengthInput"
+                   no-label-float
+                   label="Add an event length (0hr)"
+                   on-keydown="_checkAdd">
+      </paper-input>
+      <paper-input id="descriptionInput"
+                   no-label-float
+                   label="Add a description"
+                   on-keydown="_checkAdd">
+      </paper-input>
+
+      </br></br>
+      <paper-button on-tap="_add">Add</paper-button>
+
+    </div>
+
+  </template>
+
+</dom-module>
+<script>
+  Polymer({
+
+    is: 'todo-input',
+
+    // Listen for ENTER key
+    _checkAdd: function(e) {
+      if (e.keyCode === 13) {
+        this._add();
+      }
+    },
+
+    _add: function() {
+      if (this.$.todoInput.value) {
+        this.fire('add-todo', {value: this.$.todoInput.value + "|"
+          + this.$.dateInput.value + "|"
+          + this.$.timeInput.value + "|" 
+          + this.$.locationInput.value + "|"
+          + this.$.lengthInput.value + "|"
+          + this.$.descriptionInput.value});
+
+        this.$.todoInput.value = null;
+        this.$.dateInput.value = null;
+        this.$.timeInput.value = null;
+        this.$.locationInput.value = null;
+        this.$.lengthInput.value = null;
+        this.$.descriptionInput.value = null;
+      }
+    }
+
+  });
+</script>
