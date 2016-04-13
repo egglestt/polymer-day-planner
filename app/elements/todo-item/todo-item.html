@@ -190,26 +190,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _getData: function(ret, str) {
         var dataSet = str.split("|")
-        if (ret == 1){
-          return dataSet[0];
+        if (ret > 0){
+          return dataSet[ret - 1];
         }
-        if (ret == 2){
-          return dataSet[1];
-        }
-        if (ret == 3){
-          return dataSet[2];
-        }
-        if (ret == 4){
-          return dataSet[3];
-        }
-        if (ret == 5){
-          return dataSet[4];
-        }
-        if (ret == 6){
-          return dataSet[5];
-        }
-
-        
       }
 
     });
