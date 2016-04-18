@@ -25,6 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
         box-sizing: border-box;
         min-height: 50px;
+        width: 74em;
       }
 
       .row {
@@ -45,10 +46,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       paper-input {
         margin-top: -4px;
+        margin-left: 5px;
         --paper-input-container-input: {
           font-family: 'Roboto Slab';
-          font-size: 20px;
+          font-size: .9em;
           text-overflow: ellipsis;
+          width: 11em;
+          margin-left: 1em;
         };
         --paper-input-container-underline: {
           background: transparent;
@@ -86,9 +90,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                    class="flex"
                    value="[[_getData(1, todo.label)]]"
                    no-label-float
-                   on-keypress="_checkConfirmation"></paper-input>      
+                   on-keypress="_checkConfirmation"></paper-input>
+
       <paper-input id="[[_computeLabelId(date.uid)]]"
                    class="flex"
+                   style=" "
                    value="[[_getData(2, todo.label)]]"
                    no-label-float
                    on-keypress="_checkConfirmation"></paper-input>
@@ -111,7 +117,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                    class="flex"
                    value="[[_getData(6, todo.label)]]"
                    no-label-float
-                   on-keypress="_checkConfirmation"></paper-input>             
+                   on-keypress="_checkConfirmation"></paper-input>
+
       <paper-icon-button icon="todo-icons:delete"
                          class="btn-cancel"
                          aria-label="Delete Todo"
@@ -189,10 +196,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _getData: function(ret, str) {
-        var dataSet = str.split("|")
+        var dataSet = str.split("|");
+          if (!this._checkDate(dataSet[1])){
+            //this._changeCSS()
+            dataSet[1] = "OVERDUE " + "(" + dataSet[1] + ")";
+          }
+
         if (ret > 0){
           return dataSet[ret - 1];
         }
+      },
+
+     _checkDate: function(str){
+        var findDate = new Date();
+        var mm = findDate.getMonth()+1;
+        var dd = findDate.getDate();
+        var yy = findDate.getFullYear();
+        var strData = str.split("/");
+        var today = new Date(yy,mm,dd); 
+        var eventDate = new Date(strData[2],strData[0],strData[1]);
+        if (eventDate > today){
+          return true;
+        }
+        else {
+          return false;
+        }
+      },
+
+      _changeCSS: function(){
+        //this.style.;
+
       }
 
     });

@@ -113,6 +113,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       todo-input {
         margin: 0 auto;
       }
+
+      .rel {
+        position: relative;
+      }
+
+      .abs {
+        position: fixed;
+        margin-left: -.50em;
+      }
     </style>
 
     <paper-drawer-panel id="paperDrawerPanel">
@@ -138,6 +147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <iron-icon icon="todo-icons:assignment-turned-in"></iron-icon>
             <span>Completed</span>
           </a>
+
         </paper-menu>
       </div>
       <paper-header-panel main>
@@ -168,17 +178,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Main Content -->
         <div class="content">
         
-          
-           <h2 style="margin-left: 375px">Event:<span style="margin-left: 80px">Date:</span><span style="margin-left: 85px">Time:</span><span style="margin-left: 85px">Location:</span><span style="margin-left: 45px">Length:</span><span style="margin-left: 65px">Description:</span></h2>
+          <div class = abs>
+           <h2 style="margin-left: 75px">Event:<span style="margin-left: 110px">Date:</span><span style="margin-left: 120px">Time:</span><span style="margin-left: 120px">Location:</span><span style="margin-left: 75px">Duration:</span><span style="margin-left: 80px">Description:</span></h2>
            
-
+          <div class = abs>
           <todo-list todos="{{todos}}"
                      filter-by="{{route}}"
                      on-delete-todo="deleteTodo">
           </todo-list>
 
           <todo-input on-add-todo="addTodo"></todo-input>
-
+          </div>
+        </div>
         </div>
       </paper-header-panel>
     </paper-drawer-panel>
